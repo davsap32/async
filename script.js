@@ -39,31 +39,3 @@ fetchUsers().then(function (value) {
   console.log("in then fn: ", flat(value, {}));
 });
 timeTxt("at end of script");
-
-/*xx
-async function myFunction() {
-  return "Hello";
-}
-myFunction().then(
-  function(value) {myDisplayer(value);} 
-	);
-	
-	flatmapdeep
-	
-	const _ = require("lodash");
-
-const familyTree = [
-  // ...
-];
-
-const getMembers = (member)=>{
-  if(!member.children || !member.children.length){
-    return member;
-  }
-  return [member, _.flatMapDeep(member.children, getMembers)];
-}
-
-_.flatMapDeep(familyTree, getMembers);
-We pass getMembers as second argument of _.flatMapDeep. This method returns the member with no children, else returns a new array with the member, and the result of recursively called _.flatMapDeep.
-	
-*/
