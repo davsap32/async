@@ -15,9 +15,8 @@ const flat = (value, out) => {
   });
   if (value["id"]) {
     persons.push(Object.entries(out));
-    Object.keys(out).forEach((key) => {
-      contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${out[key]}<p>`);
-    });
+    //Object.keys(out).forEach((key) => {
+    //  contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${out[key]}<p>`);
   }
   return out;
 };
@@ -37,5 +36,11 @@ async function fetchUsers() {
 fetchUsers().then(function (value) {
   flat(value, {});
   console.log("in then fn:", persons);
+  let id = parseInt(prompt("Person ID:"), 10);
+  console.log("id=", id);
+  persons[id - 1].forEach((el) => {
+    contentLarge.insertAdjacentHTML("beforeend", `<p>${el[0]} : ${el[1]}</p>`);
+  });
 });
 timeTxt("at end of script");
+1;
