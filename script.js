@@ -4,6 +4,7 @@ const contentClock = document.querySelector(".clock");
 const contentSmall1 = document.querySelector(".content-small-1");
 let date;
 let dateTimeInMs;
+let persons = [];
 const flat = (value, out) => {
   Object.keys(value).forEach((key) => {
     if (typeof value[key] == "object") {
@@ -13,8 +14,8 @@ const flat = (value, out) => {
     }
   });
   if (value["id"]) {
+    persons.push(Object.entries(out));
     Object.keys(out).forEach((key) => {
-      console.log(`${key}: ${out[key]}`);
       contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${out[key]}<p>`);
     });
   }
@@ -26,23 +27,15 @@ const timeTxt = function (txt) {
   console.log(`Time in ms ${txt}: ${dateTimeInMs}`);
 };
 async function fetchUsers() {
-  //date = new Date();
-
-  //dateTimeInMs = Math.floor(date.getTime());
-  //console.log("time in ms before wait call", dateTimeInMs);
   timeTxt("before wait call");
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
-  /*
-  for (const key in data[1].address) {
-    let txt = data[1].address[key];
-    contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${txt}<p>`);
-  }
-  */
+
   timeTxt("at end of fetch fn");
   return data;
 }
 fetchUsers().then(function (value) {
-  console.log("in then fn: ", flat(value, {}));
+  flat(value, {});
+  console.log("in then fn:", persons);
 });
 timeTxt("at end of script");
