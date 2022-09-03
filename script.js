@@ -40,7 +40,7 @@ fetchUsers().then(function (value) {
 });
 timeTxt("at end of script");
 
-/*
+/*xx
 async function myFunction() {
   return "Hello";
 }
