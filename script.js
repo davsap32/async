@@ -34,30 +34,25 @@ async function fetchUsers() {
   timeTxt("at end of fetch fn");
   return data;
 }
+function showPerson(id) {
+  contentLarge.textContent = "";
+  persons[id - 1].forEach((el) => {
+    contentLarge.insertAdjacentHTML("beforeend", `<p>${el[0]} : ${el[1]}</p>`);
+  });
+}
 fetchUsers().then(function (value) {
   flat(value, {});
   console.log("in then fn:", persons);
   let id = 5;
   btnNext.addEventListener("click", function (e) {
     if (id < 10) id++;
-    contentLarge.textContent = "";
-    persons[id - 1].forEach((el) => {
-      contentLarge.insertAdjacentHTML(
-        "beforeend",
-        `<p>${el[0]} : ${el[1]}</p>`
-      );
-    });
+    showPerson(id);
   });
   btnPrevious.addEventListener("click", function (e) {
     if (id > 1) id--;
-    contentLarge.textContent = "";
-    persons[id - 1].forEach((el) => {
-      contentLarge.insertAdjacentHTML(
-        "beforeend",
-        `<p>${el[0]} : ${el[1]}</p>`
-      );
-    });
+    showPerson(id);
   });
 });
+
 timeTxt("at end of script");
 1;
