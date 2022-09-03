@@ -12,7 +12,7 @@ const flat = (value, out) => {
       out[key] = value[key]; //direct assign for values
     }
   });
-  //if (value["id"]) console.log(out);
+  if (out["id"]) console.log(out);
   return out;
 };
 const timeTxt = function (txt) {
@@ -36,7 +36,12 @@ async function fetchUsers() {
   return data;
 }
 fetchUsers().then(function (value) {
-  console.log(flat(value, {}));
+  for (const key in value[1].address) {
+    let txt = value[1].address[key];
+    console.log(`${key}: ${txt}`);
+  }
+  const out = {};
+  const flattened = flat(value, out);
 });
 timeTxt("at end of script");
 /*
