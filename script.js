@@ -2,6 +2,9 @@
 const contentLarge = document.querySelector(".content-large");
 const contentClock = document.querySelector(".clock");
 const contentSmall1 = document.querySelector(".content-small-1");
+const btnPrevious = document.querySelector(".btn--previous");
+const btnNext = document.querySelector(".btn--next");
+
 let date;
 let dateTimeInMs;
 let persons = [];
@@ -15,8 +18,6 @@ const flat = (value, out) => {
   });
   if (value["id"]) {
     persons.push(Object.entries(out));
-    //Object.keys(out).forEach((key) => {
-    //  contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${out[key]}<p>`);
   }
   return out;
 };
@@ -36,10 +37,26 @@ async function fetchUsers() {
 fetchUsers().then(function (value) {
   flat(value, {});
   console.log("in then fn:", persons);
-  let id = parseInt(prompt("Person ID:"), 10);
-  console.log("id=", id);
-  persons[id - 1].forEach((el) => {
-    contentLarge.insertAdjacentHTML("beforeend", `<p>${el[0]} : ${el[1]}</p>`);
+  let id = 5;
+  btnNext.addEventListener("click", function (e) {
+    if (id < 10) id++;
+    contentLarge.textContent = "";
+    persons[id - 1].forEach((el) => {
+      contentLarge.insertAdjacentHTML(
+        "beforeend",
+        `<p>${el[0]} : ${el[1]}</p>`
+      );
+    });
+  });
+  btnPrevious.addEventListener("click", function (e) {
+    if (id > 1) id--;
+    contentLarge.textContent = "";
+    persons[id - 1].forEach((el) => {
+      contentLarge.insertAdjacentHTML(
+        "beforeend",
+        `<p>${el[0]} : ${el[1]}</p>`
+      );
+    });
   });
 });
 timeTxt("at end of script");
