@@ -18,7 +18,7 @@ async function fetchUsers() {
 	}
 	date = new Date();
 	dateTimeInMs = Math.floor(date.getTime());
-	console.log('time in ms at end of fetch fn', dateTimeInMS);
+	//console.log('time in ms at end of fetch fn', dateTimeInMS);
 	return data;
 }
 fetchUsers().then(
