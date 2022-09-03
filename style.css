@@ -35,6 +35,10 @@ body {
   grid-row-end: span 2;
   grid-column-start: 1;
   grid-column-end: 3;
+  grid-auto-flow: row;
+  overflow: scroll;
+  line-height: 8px;
+  font-size: 14px;
 }
 .content-small-1 {
   grid-auto-flow: row;

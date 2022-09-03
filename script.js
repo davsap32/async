@@ -12,7 +12,12 @@ const flat = (value, out) => {
       out[key] = value[key]; //direct assign for values
     }
   });
-  if (value["id"]) console.log(out);
+  if (value["id"]) {
+    Object.keys(out).forEach((key) => {
+      console.log(`${key}: ${out[key]}`);
+      contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${out[key]}<p>`);
+    });
+  }
   return out;
 };
 const timeTxt = function (txt) {
@@ -28,10 +33,12 @@ async function fetchUsers() {
   timeTxt("before wait call");
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
+  /*
   for (const key in data[1].address) {
     let txt = data[1].address[key];
     contentLarge.insertAdjacentHTML("beforeend", `<p>${key}: ${txt}<p>`);
   }
+  */
   timeTxt("at end of fetch fn");
   return data;
 }
