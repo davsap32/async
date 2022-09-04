@@ -30,7 +30,7 @@ async function fetchUsers() {
   timeTxt("before wait call");
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
-
+  console.log("from json: ", data);
   timeTxt("at end of fetch fn");
   return data;
 }
@@ -40,6 +40,7 @@ function showPerson(id) {
     contentLarge.insertAdjacentHTML("beforeend", `<p>${el[0]} : ${el[1]}</p>`);
   });
 }
+
 fetchUsers().then(function (value) {
   flat(value, {});
   console.log("in then fn:", persons);
@@ -53,6 +54,18 @@ fetchUsers().then(function (value) {
     showPerson(id);
   });
 });
-
 timeTxt("at end of script");
-1;
+/*
+Object.assign(
+  {}, 
+  ...function _flatten(o) { 
+    return [].concat(...Object.keys(o)
+      .map(k => 
+        typeof o[k] === 'object' ?
+          _flatten(o[k]) : 
+          ({[k]: o[k]})
+      )
+    );
+  }(yourObject)
+)
+*/
